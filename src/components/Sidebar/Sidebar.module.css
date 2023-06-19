@@ -1,7 +1,11 @@
 .sidebar{
-    min-height: 500px;
-    width: 150px;
-    background-color:darkcyan;
+    position: fixed;
+    left: 0;
+    top: 5.3rem;
+    height: 100%;
+    width: 160px;
+    z-index: 1;
+    transition: .4s;
 }
 .list{
     margin: 0;
@@ -16,12 +20,36 @@
 .link{
     font-size: 18px;
     text-decoration: none;
-    color: darkgrey;
+    color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
 }
 .link:hover{
-    color: lightgray;
+    color: #3644D9;;
 }
 .active{
-    color: lightslategrey;
+    color: #3644D9;
 }
 a:focus{color:gold;}
+.item{
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+}
+.icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    transition: .3s;
+    order: -1;
+}
+.link:hover  .icon{
+    fill: #3644D9;
+    cursor: pointer;
+}
+.active .icon{
+    fill: #3644D9
+}

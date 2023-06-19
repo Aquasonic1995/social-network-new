@@ -6,14 +6,13 @@
     width: 100%;
 }
 .wrapper{
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
+    padding: 0 15px;
 }
 .nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 .list{
     max-width: 130px;
@@ -27,9 +26,113 @@
 }
 .item{
     display: flex;
-    flex-direction: column
+    align-items: center;
+    position: relative;
 }
 .link{
+    display: flex;
     text-decoration: none;
     color: darkgrey;
+}
+.user_name{
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 100%;
+    color: white;
+}
+.form{
+    display: block;
+    margin-top: 0;
+    position: relative;
+}
+.item_user:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -12px;
+    width: 2px;
+    height: 30px;
+    background-color: black;
+    opacity: 25%;
+}
+.image{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.input__search{
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    background-color: #2E3AB8;
+    transition: .4s;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0 25px 0 25px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0;
+}
+.btn{
+    position: absolute;
+    right: 0;
+    top: 1px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 0 20px;
+}
+.num{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: white;
+    display: block;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    border-radius: 50%;
+    font-size: 10px;
+    background-color: #3ED7FF;
+    text-align: center;
+}
+.num:before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 0;
+    z-index: -1;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid #3ED7FF;
+    animation:ripple 2s linear infinite;
+    animation-name: ripple;
+    transition: .4s;
+}
+@keyframes ripple {
+    from {
+        width: 0;
+        height: 0;
+    }
+    50% {
+        width: 10px;
+        height: 10px;
+    }
+    to {
+        width: 25px;
+        height: 25px;
+    }
 }

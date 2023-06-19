@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import Dropdown from "./components/Dropdown/Dropdown";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
               </main>
           </div>
       </div>
+        <Dropdown />
     </div>
 </BrowserRouter>
   );
