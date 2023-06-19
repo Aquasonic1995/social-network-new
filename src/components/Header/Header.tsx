@@ -40,12 +40,11 @@ const Header = (props: any) => {
                                 />
                             </svg>
                         </NavLink></li>
-                        <li className={s.item}><NavLink to="/music" className={s.link}>
-                            <svg className={s.icon} xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
-                                 width="20"
-                                 height="20" fill='white'>
+                        <li className={s.item}><NavLink to="/friends" className={s.link}>
+                            <svg className={s.icon} height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"
+                                 fill='white'>
                                 <path
-                                    d="M19,1H13A5.006,5.006,0,0,0,8,6v8.026A4.948,4.948,0,0,0,5,13a5,5,0,1,0,5,5V6a3,3,0,0,1,3-3h6a3,3,0,0,1,3,3v8.026A4.948,4.948,0,0,0,19,13a5,5,0,1,0,5,5V6A5.006,5.006,0,0,0,19,1ZM5,21a3,3,0,1,1,3-3A3,3,0,0,1,5,21Zm14,0a3,3,0,1,1,3-3A3,3,0,0,1,19,21Z"/>
+                                    d="m7.5 13a4.5 4.5 0 1 1 4.5-4.5 4.505 4.505 0 0 1 -4.5 4.5zm0-7a2.5 2.5 0 1 0 2.5 2.5 2.5 2.5 0 0 0 -2.5-2.5zm7.5 17v-.5a7.5 7.5 0 0 0 -15 0v.5a1 1 0 0 0 2 0v-.5a5.5 5.5 0 0 1 11 0v.5a1 1 0 0 0 2 0zm9-5a7 7 0 0 0 -11.667-5.217 1 1 0 1 0 1.334 1.49 5 5 0 0 1 8.333 3.727 1 1 0 0 0 2 0zm-6.5-9a4.5 4.5 0 1 1 4.5-4.5 4.505 4.505 0 0 1 -4.5 4.5zm0-7a2.5 2.5 0 1 0 2.5 2.5 2.5 2.5 0 0 0 -2.5-2.5z"/>
                             </svg>
                             <sup className={s.num}>1</sup>
                         </NavLink></li>
@@ -53,7 +52,7 @@ const Header = (props: any) => {
                     <ul className={s.list}>
                         <li className={`${s.item} ${s.item_user}`}><a href="/" className={s.link}><img
                             className={s.image}
-                            src={ava}
+                            src='https://img4.goodfon.ru/original/1280x720/d/84/chingcho-chang-vostochnaia-gubki.jpg'
                             alt="аватар"/>
                         </a>
                             <span className={s.user_name}>Smith</span>

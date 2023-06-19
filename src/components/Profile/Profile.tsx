@@ -1,11 +1,14 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
-import s from "./Profile.module.css";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+type PostPropsType={
+    messageData: Array<Object>;
+}
+const Profile = (props: PostPropsType) => {
   return<>
-      <div className={s.image}>ava+desc</div>
-      <MyPosts/>
+       <ProfileInfo/>
+      <MyPosts messageData={props.messageData} />
 </>
 }
 export default Profile
