@@ -1,13 +1,9 @@
 import React from "react";
 import classes from "./Post.module.css"
 import {NavLink} from "react-router-dom";
-type PostType ={
-  message:string,
-  countLikes:number
-  src: string,
-  user_name: string,
-}
-const Post = (props:PostType) => {
+import {messageType} from "../../../../Redux/store";
+
+const Post = (props:messageType) => {
   return<>
   <div className={classes.item}>
     <div className={classes.post_header}>

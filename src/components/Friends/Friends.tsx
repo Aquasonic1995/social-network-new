@@ -5,7 +5,7 @@ type cardFriendType = {
     cardAvatar: string,
     cardBg: string,
     user_name: string,
-    id: number,
+    id:string,
 }
 type cardFriendsPropsType={
     cardFriends: Array<cardFriendType>

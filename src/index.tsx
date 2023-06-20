@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from "./Redux/state";
+import store from './Redux/redux-store';
+import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -12,10 +13,15 @@ const root = ReactDOM.createRoot(
 export const rerender = () => {
     root.render(
         <React.StrictMode>
-            <App store={store}/>
+            <Provider store={store}>
+                <App/>
+            </Provider>,
         </React.StrictMode>
     );
 }
 rerender()
+store.subscribe(() => {
+    rerender()
+})
 
 reportWebVitals();

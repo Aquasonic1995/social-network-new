@@ -65,15 +65,16 @@
     margin-left: 10px;
 }
 .post__btn{
-    background-color: #3644D9;
+
+}
+.post__btn button{
+
     color: #ffffff;
+    background-color: #3644D9;
     display: inline-block;
     border: none;
     padding: 5px 25px;
     border-radius: 5px;
     font-size: 15px;
-}
-.post__btn button{
-    padding: 2px 8px;
-    color: #ffffff;
+    margin-top: 5px;
 }

@@ -1,50 +1,37 @@
 import React, {createRef} from "react";
 import classes from "./MyPosts.module.css"
 import Post from "./Post/Post"
-import {rerender} from "../../../index";
-import {addPostActionCreator, updatePostInProfileActionCreator} from "../../../Redux/state";
+import {MessagesType, messageType} from "../../../Redux/store";
 
-type messageType = {
-    message: string
-    countLike: number,
-    id: number,
-    src: string,
-    user_name: string,
-}
 type PostPropsType = {
-    dispatch: Function,
-    messageData: updatePostInProfileType
+    messageData: Array<messageType>
+    addPost: (post: string) => void
+    updatePostInProfilePage: (updateWords: string) => void
 
 }
-type updatePostInProfileType = {
-    messages: Array<messageType>
 
-}
 const MyPosts = (props: PostPropsType) => {
-    let NewMessagesData = props.messageData.messages.map((item) => <Post src={item.src} message={item.message}
-                                                                         countLikes={item.countLike}
-                                                                         key={item.id}
-                                                                         user_name={item.user_name}/>)
+    let NewMessagesData = props.messageData.map((item, index) => <Post src={item.src} message={item.message}
+                                                                                countLikes={item.countLikes}
+                                                                                key={index}
+                                                                                user_name={item.user_name}
+                                                                                id={item.id}/>)
     const newPostEl = createRef<HTMLTextAreaElement>();
-    const addPost = (e: React.SyntheticEvent) => {
-        e.preventDefault()
+    const addPost = () => {
         const post = newPostEl.current?.value;
-        if (post === ''|| typeof post !== "string") {
-            return
-        } else {
-            props.dispatch(addPostActionCreator(post))
+        if (post) {
+            props.addPost(post)
         }
         // @ts-ignore
         newPostEl.current.value = '';
-        rerender()
+
     }
-    const updatePostInProfilePage = (e: React.SyntheticEvent) => {
-        e.preventDefault()
+    const updatePostInProfilePage = () => {
         const updateWords = newPostEl.current?.value;
-        if (typeof updateWords === "string") {
-            props.dispatch(updatePostInProfileActionCreator(updateWords))
+        if ( updateWords) {
+            props.updatePostInProfilePage(updateWords)
         }
-        rerender()
+
     }
     return <>
         <div className={classes.MyPost}>
@@ -54,7 +41,8 @@ const MyPosts = (props: PostPropsType) => {
                     <div className={classes.group}>
                         <textarea onChange={updatePostInProfilePage} ref={newPostEl}
                                   name="message"
-                                  className={classes.form__control} placeholder="Write something here..."/>
+                                  className={classes.form__control} placeholder="Write something here..."
+                                  value={newPostEl.current?.value}/>
                     </div>
                     <ul className={classes.button__group}>
                         <li className={classes.photo__btn}>
@@ -97,7 +85,7 @@ const MyPosts = (props: PostPropsType) => {
                             </button>
                         </li>
                         <li className={classes.post__btn}>
-                            <button onClick={addPost}>Post</button>
+                            <button  type="button" onClick={addPost}>Post</button>
                         </li>
                     </ul>
                 </form>
