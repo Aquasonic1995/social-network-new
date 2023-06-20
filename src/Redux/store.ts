@@ -1,4 +1,6 @@
 import classes from "../components/Dialogs/Dialogs.module.css";
+import profilePageAddPostReducer from "./ProfilePageAddPostReducer";
+import chatListAddMessageReducer from "./ChatListAddMesageReuscer";
 
 type messageType = {
     message: string
@@ -180,49 +182,10 @@ const store: storeType = {
         return this._state
     },
     dispatch(action: dispatchActionType) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                user_name: "Julie R. Morley",
-                message: action.newEl,
-                countLike: 0,
-                src: 'https://templates.envytheme.com/zust/default/assets/images/user/user-16.jpg',
-                id: 5,
-            }
-            this._state.ProfilePage.messages.unshift(newPost)
-        } else if (action.type === UPDATE_POST) {
-            this._state.ProfilePage.updatePostInProfile = action.newWords;
-        } else if (action.type === ADD_MESSAGE) {
-            const newMessage = {
-                src: "https://templates.envytheme.com/zust/default/assets/images/user/user-29.jpg",
-                message: action.newMes,
-                message_time: '7:45',
-                className: "",
-                id: 6,
-            }
-            this._state.MessagePage.MessageDialogsItems.push(newMessage)
-        } else if (action.type === UPDATE_MESSAGE) {
-            this._state.MessagePage.updateWordInMessagePage = action.newWords;
-        }
+        profilePageAddPostReducer(this._state.ProfilePage, action)
+        chatListAddMessageReducer(this._state.MessagePage, action)
     },
 }
-export const addPostActionCreator = (post: string) =>{
-    return {type: 'ADD_POST', newEl: post}
-}
-export const updatePostInProfileActionCreator = (updateWords: string) => {
-    return {type: 'UPDATE_POST', newWords: updateWords}
-}
-export const addMessageActionCreator = (message: string) =>{
-    return {type: 'ADD_MESSAGE', newMes: message}
-}
-export const updateMessageInProfileActionCreator = (updateWords: string) => {
-    return {type: 'UPDATE_MESSAGE', newWords: updateWords}
-}
-
-const ADD_POST = 'ADD_POST';
-const UPDATE_POST = 'UPDATE_POST';
-
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 
 export default store
 

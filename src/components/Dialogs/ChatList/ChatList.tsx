@@ -2,11 +2,7 @@ import React from 'react';
 import classes from "./ChatList.module.css";
 
 import {rerender} from "../../../index";
-import {
-    addMessageActionCreator,
-    updateMessageInProfileActionCreator,
-    updatePostInProfileActionCreator
-} from "../../../Redux/state";
+import {addMessageActionCreator, updateMessageInProfileActionCreator} from "../../../Redux/ChatListAddMesageReuscer";
 
 type newMessageType = {
     dispatch: any
