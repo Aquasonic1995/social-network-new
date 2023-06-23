@@ -12,6 +12,7 @@ import Friends from './components/Friends/Friends';
 import {stateType} from "./Redux/store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import store from "./Redux/redux-store";
+import FriendsContainer from "./components/Friends/FriendsContainer";
 
 function App() {
     return (
@@ -25,7 +26,7 @@ function App() {
                             <Routes>
                                 <Route path="/profile/*" element={<Profile/>}/>
                                 <Route path="/dialogs/*" element={<DialogsContainer/>}/>
-                                <Route path="/friends" element={<Friends cardFriends={store.getState().FriendsPage.cardFriends}/>}/>
+                                <Route path="/friends" element={<FriendsContainer/>}/>
                                 <Route path="/news" element={<News/>}/>
                                 <Route path="/music" element={<Music/>}/>
                                 <Route path="/settings" element={<Settings/>}/>

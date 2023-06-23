@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialogs from "./Dialogs";
-import {addMessageActionCreator, updateMessageInDialogsActionCreator} from "../../Redux/ChatListAddMessageReduscer";
+import {addMessageActionCreator, updateMessageInDialogsActionCreator} from "../../Redux/DialogsPageAddMessageReducer";
 import {stateType} from "../../Redux/store";
 import {connect} from "react-redux";
 

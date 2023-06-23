@@ -1,5 +1,5 @@
 import profilePageAddPostReducer from "./ProfilePageAddPostReducer";
-import chatListAddMessageReducer from "./ChatListAddMessageReduscer";
+import chatListAddMessageReducer from "./DialogsPageAddMessageReducer";
 
 export type messageType = {
     message: string

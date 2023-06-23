@@ -1,14 +1,14 @@
 import {v1} from "uuid";
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 
 type addMessageActionType = {
-    newEl: string
+    newEl?: string
     type: string
-    newWords: string
-    newMes: string
+    newWords?: string
+    newMes?: string
 }
-let initialState = {
+export let initialState = {
     UserDialogsItems: [
         {
             src: "https://templates.envytheme.com/zust/default/assets/images/user/user-13.jpg",
@@ -62,13 +62,13 @@ let initialState = {
     ],
     updateWordInMessagePage: '',
 }
-const chatListAddMessageReducer = (state = initialState, action: addMessageActionType) => {
+export const chatListAddMessageReducer = (state = initialState, action: addMessageActionType) => {
     switch (action.type) {
         case ADD_MESSAGE :
             const newMessage = {
                 src: "https://templates.envytheme.com/zust/default/assets/images/user/user-29.jpg",
                 message: action.newMes,
-                message_time: '7:45',
+                message_time: `${new Date().getHours()}:${new Date().getMinutes()}`,
                 className: "",
                 id: v1(),
             }
