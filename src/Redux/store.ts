@@ -1,6 +1,3 @@
-import profilePageAddPostReducer from "./ProfilePageAddPostReducer";
-import chatListAddMessageReducer from "./DialogsPageAddMessageReducer";
-
 export type messageType = {
     message: string
     countLikes: number,
@@ -45,13 +42,7 @@ export type stateType = {
     DialogsPage: DialogsType
     FriendsPage: cardFriendsType
 }
-export type storeType = {
-    _state: stateType,
-    dispatch: Function,
-    getState(): stateType,
-    _callSubscriber: Function,
-    subscribe: Function,
-}
+
 export type dispatchActionType = {
     newEl: string
     type: string

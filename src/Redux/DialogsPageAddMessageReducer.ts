@@ -1,14 +1,32 @@
 import {v1} from "uuid";
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
-
-type addMessageActionType = {
-    newEl?: string
-    type: string
-    newWords?: string
-    newMes?: string
+type AddMessageAT = {
+    type: 'ADD_MESSAGE'
+    newMes: string
 }
-export let initialState = {
+type UpdateWordsInDialogsAT = {
+    type: 'UPDATE_MESSAGE'
+    newWords: string
+}
+type AddMessageInDialogsAT = AddMessageAT | UpdateWordsInDialogsAT
+export type UserDialogsItemType = {
+    src: string
+    name: string
+    id: string
+}
+export type MessageDialogsItemType = {
+    src: string
+    message: string
+    message_time: string
+    id: string
+}
+export type InitialStateInMessagePageType = {
+    UserDialogsItems: Array<UserDialogsItemType>
+    MessageDialogsItems: Array<MessageDialogsItemType>
+    updateWordInMessagePage: string
+}
+export let initialState: InitialStateInMessagePageType = {
     UserDialogsItems: [
         {
             src: "https://templates.envytheme.com/zust/default/assets/images/user/user-13.jpg",
@@ -62,7 +80,7 @@ export let initialState = {
     ],
     updateWordInMessagePage: '',
 }
-export const chatListAddMessageReducer = (state = initialState, action: addMessageActionType) => {
+const addMessagesInMessagePageReducer = (state = initialState, action: AddMessageInDialogsAT): InitialStateInMessagePageType => {
     switch (action.type) {
         case ADD_MESSAGE :
             const newMessage = {
@@ -96,4 +114,4 @@ export const updateMessageInDialogsActionCreator = (updateWordsInDialogs: string
 }
 
 
-export default chatListAddMessageReducer
+export default addMessagesInMessagePageReducer

@@ -1,15 +1,27 @@
 import React from 'react';
-import {addPostActionCreator, updatePostInProfileActionCreator} from '../../../Redux/ProfilePageAddPostReducer';
-import {stateType} from "../../../Redux/store";
+import {
+    AddMessageInProfilePage,
+    addPostActionCreator,
+    updatePostInProfileActionCreator
+} from '../../../Redux/ProfilePageAddPostReducer';
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {AppStateType} from "../../../Redux/redux-store";
+import {Dispatch} from "redux";
 
-const mapStateToProps = (state: stateType) => {
+type mapStateToPropsType = {
+    messageData: Array<AddMessageInProfilePage>
+}
+type mapDispatchToPropsType = {
+    addPost: (post: string) => void
+    updatePostInProfilePage: (updateWords: string) => void
+}
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         messageData: state.ProfilePage.messages
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
 
     return {
         addPost: (post: string) => {

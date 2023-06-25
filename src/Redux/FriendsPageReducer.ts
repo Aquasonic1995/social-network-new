@@ -1,10 +1,11 @@
 import {v1} from 'uuid'
+
 const ADD_FRIEND = 'ADD_FRIEND';
 const DELETE_FRIEND = 'DELETE_FRIEND';
 const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL'
 const SET_USERS = 'SET_USERS'
-let initialState = {
+let initialState: InitialStateInFriendPageType = {
     cardFriends: [
         {
             cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-1.jpg',
@@ -56,7 +57,7 @@ let initialState = {
         }
     ],
 }
-type userStateType = {
+export type UserStateType = {
     cardAvatar: string,
     cardBg: string,
     user_name: string,
@@ -64,26 +65,26 @@ type userStateType = {
     friendStatus: boolean,
     sendMessageStatus: boolean
 }
-type initialStateType = {
-    cardFriends: Array<userStateType>
+export type InitialStateInFriendPageType = {
+    cardFriends: Array<UserStateType>
 }
-type actionFriendPageReducerType = addFriendAT | delFriendAT | openModalInFriendAT | closeModalInFriendAT | setUsersAT
-type addFriendAT = {
+type ActionFriendPageReducerType = AddFriendAT | DelFriendAT | OpenModalInFriendAT | CloseModalInFriendAT | SetUsersAT
+type AddFriendAT = {
     type: 'ADD_FRIEND', uId: string
 }
-type delFriendAT = {
+type DelFriendAT = {
     type: 'DELETE_FRIEND', uId: string
 }
-type openModalInFriendAT = {
+type OpenModalInFriendAT = {
     type: 'OPEN_MODAL', uId: string
 }
-type closeModalInFriendAT = {
+type CloseModalInFriendAT = {
     type: 'CLOSE_MODAL', uId: string
 }
-type setUsersAT = {
-    type: 'SET_USERS', users: userStateType
+type SetUsersAT = {
+    type: 'SET_USERS', users: Array<UserStateType>
 }
-const friendsPageReducer = (state = initialState, action: actionFriendPageReducerType): initialStateType => {
+const friendsPageReducer = (state = initialState, action: ActionFriendPageReducerType): InitialStateInFriendPageType => {
     switch (action.type) {
         case ADD_FRIEND: {
             return {
@@ -134,26 +135,26 @@ const friendsPageReducer = (state = initialState, action: actionFriendPageReduce
             }
         }
         case SET_USERS: {
-            return {...state, cardFriends: [...initialState.cardFriends, action.users]}
+            return {...state, cardFriends: [...state.cardFriends, ...action.users]}
         }
     }
 
 
     return state
 }
-export const addFriendAC = (uId: string): addFriendAT => {
+export const addFriendAC = (uId: string): AddFriendAT => {
     return {type: ADD_FRIEND, uId: uId}
 }
-export const delFriendAC = (uId: string): delFriendAT => {
+export const delFriendAC = (uId: string): DelFriendAT => {
     return {type: DELETE_FRIEND, uId: uId}
 }
-export const openModalInFriendAC = (uId: string): openModalInFriendAT  => {
+export const openModalInFriendAC = (uId: string): OpenModalInFriendAT => {
     return {type: OPEN_MODAL, uId: uId}
 }
-export const closeModalInFriendAC = (uId: string): closeModalInFriendAT => {
+export const closeModalInFriendAC = (uId: string): CloseModalInFriendAT => {
     return {type: CLOSE_MODAL, uId: uId}
 }
-export const setUsersAC = (users: userStateType): setUsersAT => {
+export const setUsersAC = (users: Array<UserStateType>): SetUsersAT => {
     return {type: SET_USERS, users: users}
 }
 export default friendsPageReducer

@@ -1,16 +1,32 @@
 import React from 'react';
 import Dialogs from "./Dialogs";
-import {addMessageActionCreator, updateMessageInDialogsActionCreator} from "../../Redux/DialogsPageAddMessageReducer";
+import {
+    addMessageActionCreator, MessageDialogsItemType,
+    updateMessageInDialogsActionCreator,
+    UserDialogsItemType
+} from "../../Redux/DialogsPageAddMessageReducer";
 import {stateType} from "../../Redux/store";
 import {connect} from "react-redux";
+import {AppStateType} from "../../Redux/redux-store";
+import {Dispatch} from "redux";
 
-const mapStateToProps = (state:stateType) =>{
+type mapStateToPropsType = {
+    UserDialogsItems: Array<UserDialogsItemType>
+    MessageDialogsItems: Array<MessageDialogsItemType>
+    updateWordInMessagePage: string
+}
+type mapDispatchToPropsType = {
+    addMessage: (message: string) => void
+    updateWordsInDialogs: (updateWordsInDialogs: string) => void
+}
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 return{
     UserDialogsItems: state.DialogsPage.UserDialogsItems,
-    MessageDialogsItems: state.DialogsPage.MessageDialogsItems
+    MessageDialogsItems: state.DialogsPage.MessageDialogsItems,
+    updateWordInMessagePage: state.ProfilePage.updatePostInProfile
 }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
     return {
     addMessage:(message:string) =>{
         dispatch(addMessageActionCreator(message))

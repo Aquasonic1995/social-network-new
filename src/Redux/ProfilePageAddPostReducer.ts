@@ -1,8 +1,22 @@
 import {v1} from "uuid";
-import {dispatchActionType} from "./store";
-
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST = 'UPDATE_POST';
+type AddPostInProfilePageAT = AddPostAT | UpdateWordsInPostAT
+export type AddPostAT = {
+    type: 'ADD_POST',
+    newEl: string
+}
+export type UpdateWordsInPostAT = {
+    type: 'UPDATE_POST',
+    updateWords: string
+}
+export type  AddMessageInProfilePage = {
+    user_name: string
+    message: string
+    countLikes: number
+    src: string
+    id: string
+}
 
 let initialState = {
     messages: [
@@ -20,11 +34,11 @@ let initialState = {
             src: 'https://templates.envytheme.com/zust/default/assets/images/user/user-11.jpg',
             id: v1(),
         },
-    ],
+    ]as Array<AddMessageInProfilePage>,
     updatePostInProfile: '',
 }
-
-const profilePageAddPostReducer = (state = initialState, action: dispatchActionType) => {
+type InitialStateInProfilePageType = typeof initialState
+const profilePageAddPostReducer = (state = initialState, action: AddPostInProfilePageAT): InitialStateInProfilePageType => {
     switch (action.type) {
         case ADD_POST :
             const newPost = {
@@ -41,7 +55,7 @@ const profilePageAddPostReducer = (state = initialState, action: dispatchActionT
         case UPDATE_POST :{
             return {
                 ...state,
-                updatePostInProfile: action.newWords
+                updatePostInProfile: action.updateWords
             };
         }
 
