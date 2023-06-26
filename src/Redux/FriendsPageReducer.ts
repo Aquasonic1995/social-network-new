@@ -5,156 +5,145 @@ const DELETE_FRIEND = 'DELETE_FRIEND';
 const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL'
 const SET_USERS = 'SET_USERS'
-let initialState: InitialStateInFriendPageType = {
-    cardFriends: [
-        {
-            cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-1.jpg',
-            cardBg: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-1.jpg',
-            user_name: 'Jose Marroquin',
-            id: v1(),
-            friendStatus: true,
-            sendMessageStatus: false
-        },
-        {
-            cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-2.jpg',
-            cardBg: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-2.jpg',
-            user_name: 'Myrtle Lewis',
-            id: v1(),
-            friendStatus: false,
-            sendMessageStatus: false
-        },
-        {
-            cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-3.jpg',
-            cardBg: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-3.jpg',
-            user_name: 'Howard Tam',
-            id: v1(),
-            friendStatus: true,
-            sendMessageStatus: false
-        },
-        {
-            cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-4.jpg',
-            cardBg: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-4.jpg',
-            user_name: 'Kimberly Blum',
-            id: v1(),
-            friendStatus: false,
-            sendMessageStatus: false
-        },
-        {
-            cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-5.jpg',
-            cardBg: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-5.jpg',
-            user_name: 'Mary Mercado',
-            id: v1(),
-            friendStatus: true,
-            sendMessageStatus: false
-        },
-        {
-            cardAvatar: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-6.jpg',
-            cardBg: 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-6.jpg',
-            user_name: 'Robert Ward',
-            id: v1(),
-            friendStatus: false,
-            sendMessageStatus: false
-        }
-    ],
+export const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT'
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+export const SET_TOGGLE_PRELOADER = 'SET_TOGGLE_PRELOADER'
+let initialState = {
+    cardFriends: [] as Array<UserStateType>,
+    currentPageNumber: 1,
+    pageSize: 21,
+    totalUserCount: 30,
+    preloader: false
 }
 export type UserStateType = {
-    cardAvatar: string,
-    cardBg: string,
-    user_name: string,
-    id: string,
-    friendStatus: boolean,
-    sendMessageStatus: boolean
+    id: number
+    name: string
+    status: string
+    uniqueUrlName: string
+    photos: {
+        small: string
+        large: string
+    }
+    followed: boolean
 }
-export type InitialStateInFriendPageType = {
-    cardFriends: Array<UserStateType>
-}
-type ActionFriendPageReducerType = AddFriendAT | DelFriendAT | OpenModalInFriendAT | CloseModalInFriendAT | SetUsersAT
+type InitialStateInFriendPageType = typeof initialState
+type ActionFriendPageReducerType =
+    AddFriendAT
+    | DelFriendAT
+    | OpenModalInFriendAT
+    | CloseModalInFriendAT
+    | SetUsersAT
+    | SetCurrentPageNumberAT
+    | SetTotalUserCountAT
+    | setTogglePreloaderAT
 type AddFriendAT = {
-    type: 'ADD_FRIEND', uId: string
+    type: 'ADD_FRIEND', uId: number
 }
 type DelFriendAT = {
-    type: 'DELETE_FRIEND', uId: string
+    type: 'DELETE_FRIEND', uId: number
 }
 type OpenModalInFriendAT = {
-    type: 'OPEN_MODAL', uId: string
+    type: 'OPEN_MODAL', uId: number
 }
 type CloseModalInFriendAT = {
-    type: 'CLOSE_MODAL', uId: string
+    type: 'CLOSE_MODAL', uId: number
 }
 type SetUsersAT = {
     type: 'SET_USERS', users: Array<UserStateType>
+}
+type SetCurrentPageNumberAT = {
+    type: 'SET_CURRENT_PAGE',
+    currentPageNumber: number
+}
+type SetTotalUserCountAT = {
+    type: 'SET_TOTAL_USER_COUNT',
+    totalUserCount: number
+}
+type setTogglePreloaderAT = {
+    type: 'SET_TOGGLE_PRELOADER'
+    preloader: boolean
 }
 const friendsPageReducer = (state = initialState, action: ActionFriendPageReducerType): InitialStateInFriendPageType => {
     switch (action.type) {
         case ADD_FRIEND: {
             return {
-                cardFriends: [
-                    ...state.cardFriends.map((s) => {
-                        if (s.id === action.uId) {
-                            return {...s, friendStatus: false};
-                        }
-                        return s
-                    }),
-                ],
+                ...state,
+                cardFriends: state.cardFriends.map(s => s.id === action.uId ? {...s, followed: !s.followed} : s)
             }
         }
         case DELETE_FRIEND: {
             return {
-                cardFriends: [
-                    ...state.cardFriends.map((s) => {
-                        if (s.id === action.uId) {
-                            return {...s, friendStatus: true};
-                        }
-                        return s
-                    }),
-                ],
+                ...state,
+                cardFriends: state.cardFriends.map(s => s.id === action.uId ? {...s, followed: !s.followed} : s)
             }
         }
         case OPEN_MODAL: {
             return {
-                cardFriends: [
-                    ...state.cardFriends.map((c) => {
-                        if (c.id === action.uId) {
-                            return {...c, sendMessageStatus: true};
-                        }
-                        return c
-                    })
-                ]
+                ...state
             }
         }
         case CLOSE_MODAL: {
             return {
-                cardFriends: [
-                    ...state.cardFriends.map((c) => {
-                        if (c.id === action.uId) {
-                            return {...c, sendMessageStatus: false};
-                        }
-                        return c
-                    })
-                ]
+                ...state
             }
         }
         case SET_USERS: {
-            return {...state, cardFriends: [...state.cardFriends, ...action.users]}
+            return {...state, cardFriends: [...action.users]}
         }
+        case SET_CURRENT_PAGE: {
+            return {
+                ...state,
+                currentPageNumber: action.currentPageNumber
+            }
+        }
+        case SET_TOTAL_USER_COUNT: {
+            return {
+                ...state,
+                totalUserCount: action.totalUserCount
+            }
+        }
+        case SET_TOGGLE_PRELOADER: {
+            return {
+                ...state,
+                preloader: action.preloader
+            }
+        }
+        default:
+            return state
     }
-
-
-    return state
 }
-export const addFriendAC = (uId: string): AddFriendAT => {
+export const addFriendAC = (uId: number): AddFriendAT => {
     return {type: ADD_FRIEND, uId: uId}
 }
-export const delFriendAC = (uId: string): DelFriendAT => {
+export const delFriendAC = (uId: number): DelFriendAT => {
     return {type: DELETE_FRIEND, uId: uId}
 }
-export const openModalInFriendAC = (uId: string): OpenModalInFriendAT => {
+export const openModalInFriendAC = (uId: number): OpenModalInFriendAT => {
     return {type: OPEN_MODAL, uId: uId}
 }
-export const closeModalInFriendAC = (uId: string): CloseModalInFriendAT => {
+export const closeModalInFriendAC = (uId: number): CloseModalInFriendAT => {
     return {type: CLOSE_MODAL, uId: uId}
 }
 export const setUsersAC = (users: Array<UserStateType>): SetUsersAT => {
     return {type: SET_USERS, users: users}
 }
+export const setCurrentPageNumberAC = (currentPageNumber: number): SetCurrentPageNumberAT => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPageNumber: currentPageNumber
+    }
+}
+export const setTotalUserCountAC = (totalUserCount: number): SetTotalUserCountAT => {
+    return {
+        type: SET_TOTAL_USER_COUNT,
+        totalUserCount: totalUserCount
+    }
+}
+export const setTogglePreloaderAC = (loader: boolean): setTogglePreloaderAT => {
+    return {
+        type: SET_TOGGLE_PRELOADER,
+        preloader: loader
+    }
+}
+
 export default friendsPageReducer

@@ -3,31 +3,26 @@ import classes from "./CardFriend.module.css";
 import {NavLink} from "react-router-dom";
 
 type propsCardSrc = {
-    avatarSrc: string,
-    bgSrc: string,
-    user_name: string,
-    friendStatus: boolean,
-    addFriend: (id: string) => void
-    delFriend: (id: string) => void
-    openModal: (id: string) => void
-    closeModal: (id: string) => void
-    id: string,
-    sendMessageStatus: boolean
+    user_name: string
+    addFriend: (id: number) => void
+    delFriend: (id: number) => void
+    id: number,
+    followed: boolean
 }
 const CardFriend = (props: propsCardSrc) => {
-    const onClickAddFriendHandler = (id: string) => {
+    const onClickAddFriendHandler = (id: number) => {
         props.addFriend(id)
     }
-    const onClickDelFriendHandler = (id: string) => {
+    const onClickDelFriendHandler = (id: number) => {
         props.delFriend(id)
     }
-    const onClickSendMessageHandler = (id: string) => {
-        props.openModal(id)
+    const onClickSendMessageHandler = (id: number) => {
     }
     return (<> <div className={classes.card}>
         <div className={classes.friends__image}>
                     <NavLink to="#">
-                        <img src={props.bgSrc} alt="img_bg"/>
+                        <img src='https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-1.jpg'
+                             alt="img_bg"/>
                     </NavLink>
             <div className={classes.icon}>
                 <NavLink className={classes.link} to="#">
@@ -67,7 +62,7 @@ const CardFriend = (props: propsCardSrc) => {
                 </ul>
                 <div className={classes.button_group}>
                     <div className={classes.add_friend_btn}>
-                        {props.friendStatus ? <button onClick={() => {
+                        {props.followed ? <button onClick={() => {
                                 onClickAddFriendHandler(props.id)
                             }} type="submit">Add Friend</button> :
                             <button onClick={() => {
@@ -80,9 +75,6 @@ const CardFriend = (props: propsCardSrc) => {
                         }} type="submit">Send Message
                         </button>
                     </div>
-                    </div>
-                    <div className={classes.send_message_btn}>
-                        <button type="submit">Send Message</button>
                     </div>
                 </div>
             </div>
