@@ -6,6 +6,10 @@ type propsCardSrc = {
     user_name: string
     addFriend: (id: number) => void
     delFriend: (id: number) => void
+    user_avatar: {
+        "small": string | undefined,
+        "large": string | undefined
+    }
     id: number,
     followed: boolean
 }
@@ -21,8 +25,9 @@ const CardFriend = (props: propsCardSrc) => {
     return (<> <div className={classes.card}>
         <div className={classes.friends__image}>
                     <NavLink to="#">
-                        <img src='https://templates.envytheme.com/zust/default/assets/images/friends/friends-bg-1.jpg'
-                             alt="img_bg"/>
+                        <img
+                            src={props.user_avatar.small ? props.user_avatar.small : 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-1.jpg'}
+                            alt="img_card"/>
                     </NavLink>
             <div className={classes.icon}>
                 <NavLink className={classes.link} to="#">

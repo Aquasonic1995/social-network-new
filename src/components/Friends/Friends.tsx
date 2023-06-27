@@ -26,8 +26,7 @@ export type cardFriendsPropsType = {
     }
     let Cards = props.cardFriends.map(item => <CardFriend key={item.id} addFriend={props.addFriend}
                                                           delFriend={props.delFriend}
-        // openModal={props.openModal}
-        // closeModal={props.closeModal}
+                                                          user_avatar={item.photos}
                                                           user_name={item.name} id={item.id}
                                                           followed={item.followed}/>)
     return (
