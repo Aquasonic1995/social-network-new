@@ -15,21 +15,24 @@ import {AppStateType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {Preloader} from "../../Preloader/Preloader";
 
-type FriendsContainerProps = {
-    cardFriends: Array<UserStateType>;
-    currentPageNumber: number;
-    pageSize: number;
-    totalUserCount: number;
+type mapStateToPropsType = {
+    cardFriends: Array<UserStateType>
+    currentPageNumber: number
+    pageSize: number
+    totalUserCount: number
+    preloader: boolean
+}
+type mapDispatchToPropsType = {
     addFriend: (id: number) => void;
     delFriend: (id: number) => void;
     setUser: (user: Array<UserStateType>) => void;
     setCurrentPage: (currentPageNumber: number) => void;
     setTotalUserCount: (totalUserCount: number) => void;
-    preloader:boolean
     setTogglePreloader: (preloader: boolean) => void
 };
 
-const FriendsContainer = (props:FriendsContainerProps) => {
+type FriendsContainerType = mapStateToPropsType & mapDispatchToPropsType
+const FriendsContainer = (props:FriendsContainerType) => {
     useEffect(() => {
         props.setTogglePreloader(true)
         axios

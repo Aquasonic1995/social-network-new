@@ -24,7 +24,7 @@ const CardFriend = (props: propsCardSrc) => {
     }
     return (<> <div className={classes.card}>
         <div className={classes.friends__image}>
-                    <NavLink to="#">
+            <NavLink to={`profile/${props.id}`}>
                         <img
                             src={props.user_avatar.small ? props.user_avatar.small : 'https://templates.envytheme.com/zust/default/assets/images/friends/friends-1.jpg'}
                             alt="img_card"/>

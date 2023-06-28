@@ -21,7 +21,7 @@ function App() {
                         <Sidebar/>
                         <main className="content">
                             <Routes>
-                                <Route path="/profile/*" element={<ProfileContainer/>}/>
+                                <Route path = '/profile/:userId?' element ={<ProfileContainer />} />
                                 <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                                 <Route path="/friends" element={<FriendsContainer/>}/>
                                 <Route path="/news" element={<News/>}/>
