@@ -25,8 +25,8 @@ let initialState = {
     updatePostInProfile: '',
     profile: null
 }
-type InitialStateInProfilePageType = typeof initialState
-const profilePageAddPostReducer = (state = initialState, action: ProfilePageReducerAT): InitialStateInProfilePageType => {
+export type InitialStateInProfilePageType = typeof initialState
+const profilePageReducer = (state = initialState, action: ProfilePageReducerAT): InitialStateInProfilePageType => {
     switch (action.type) {
         case ADD_POST :
             const newPost = {
@@ -57,7 +57,7 @@ const profilePageAddPostReducer = (state = initialState, action: ProfilePageRedu
             return state
     }
 }
-export default profilePageAddPostReducer
+export default profilePageReducer
 
 export const addPostActionCreator = (post: string) => ({type: 'ADD_POST', newEl: post} as const)
 

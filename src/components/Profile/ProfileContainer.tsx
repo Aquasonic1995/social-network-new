@@ -7,7 +7,7 @@ import axios from "axios";
 import {AppStateType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
-import {setProfileUserAC} from "../../Redux/ProfilePageAddPostReducer";
+import {setProfileUserAC} from "../../Redux/ProfilePageReducer";
 type PathParamsType = {
     userId: string,
 }
@@ -61,14 +61,14 @@ const ProfileContainer = (props:any) => {
       <MyPostsContainer/>
 </>
 }
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType):MapStateToPropsMainType => {
     return {
         profile: state.ProfilePage.profile,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        setProfileUser: (profile: any) => {
+        setProfileUser: (profile: initialProfileType) => {
             dispatch(setProfileUserAC(profile))
         },
     }

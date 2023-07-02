@@ -14,6 +14,7 @@ import {
 import {AppStateType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {Preloader} from "../../Preloader/Preloader";
+import {getUser} from "../API/api";
 
 type mapStateToPropsType = {
     cardFriends: Array<UserStateType>
@@ -35,27 +36,21 @@ type FriendsContainerType = mapStateToPropsType & mapDispatchToPropsType
 const FriendsContainer = (props:FriendsContainerType) => {
     useEffect(() => {
         props.setTogglePreloader(true)
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPageNumber}&count=${props.pageSize}`
-            )
-            .then((response) => {
+        getUser(props.currentPageNumber, props.pageSize)
+            .then((data) => {
                 props.setTogglePreloader(false)
-                props.setUser(response.data.items);
-                props.setTotalUserCount(response.data.totalCount);
+                props.setUser(data.items);
+                props.setTotalUserCount(data.totalCount);
             });
     }, [props.currentPageNumber, props.pageSize, props.setUser, props.setTotalUserCount]);
 
     const onChangedPage = (pageNumber: number) => {
         props.setCurrentPage(pageNumber);
         props.setTogglePreloader(true)
-        axios
-            .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`
-            )
-            .then((response) => {
+        getUser(pageNumber, props.pageSize)
+            .then((data) => {
                 props.setTogglePreloader(true)
-                props.setUser(response.data.items);
+                props.setUser(data.items);
             });
     }
 

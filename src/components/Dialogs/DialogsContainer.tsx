@@ -4,7 +4,7 @@ import {
     addMessageActionCreator, MessageDialogsItemType,
     updateMessageInDialogsActionCreator,
     UserDialogsItemType
-} from "../../Redux/DialogsPageAddMessageReducer";
+} from "../../Redux/DialogsPageReducer";
 import {stateType} from "../../Redux/store";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";

@@ -2,6 +2,7 @@ let initialState = {
     id: 0,
     email: 'null',
     login: 'null',
+    isAuth: false
 }
 type InitialStateType = typeof initialState
 
@@ -10,7 +11,8 @@ export const authReducer = (state: InitialStateType = initialState, action: SetD
         case 'SET_USER_DATA':
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
         default:
             return state
@@ -18,8 +20,8 @@ export const authReducer = (state: InitialStateType = initialState, action: SetD
 }
 
 type SetDataAT = SetUserDataAT
-export const setDataAC = (userUd: number, email: string, login: string) => ({
+export const setDataAC = (userId: number, email: string, login: string) => ({
     type: 'SET_USER_DATA',
-    data: {id: userUd, email: email, login: login,}
+    data: {id: userId, email: email, login: login,}
 } as const)
 type SetUserDataAT = ReturnType<typeof setDataAC>

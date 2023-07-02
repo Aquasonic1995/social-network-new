@@ -18,6 +18,7 @@ export type cardFriendsPropsType = {
     onChangedPage: (pageNumber: number) => void
 }
  export function Friends  (props:cardFriendsPropsType)  {
+
     {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
     let pages = []

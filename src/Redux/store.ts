@@ -181,7 +181,7 @@ export type dispatchActionType = {
 //         this._callSubscriber = observer
 //     },
 //     dispatch(action: dispatchActionType) {
-//         profilePageAddPostReducer(this._state.ProfilePage, action)
+//         profilePageReducer(this._state.ProfilePage, action)
 //         chatListAddMessageReducer(this._state.MessagePage, action)
 //         this._callSubscriber(this._state)
 //     },
