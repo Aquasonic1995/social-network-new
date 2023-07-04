@@ -1,4 +1,6 @@
 import {v1} from 'uuid'
+import {userAPI} from "../components/API/api";
+import {AppThunk} from "./redux-store";
 
 const ADD_FRIEND = 'ADD_FRIEND';
 const DELETE_FRIEND = 'DELETE_FRIEND';
@@ -27,7 +29,7 @@ export type UserStateType = {
     followed: boolean
 }
 type InitialStateInFriendPageType = typeof initialState
-type ActionFriendPageReducerType =
+export type ActionFriendPageReducerType =
     AddFriendAT
     | DelFriendAT
     | OpenModalInFriendAT
@@ -118,12 +120,6 @@ export const addFriendAC = (uId: number): AddFriendAT => {
 export const delFriendAC = (uId: number): DelFriendAT => {
     return {type: DELETE_FRIEND, uId: uId}
 }
-export const openModalInFriendAC = (uId: number): OpenModalInFriendAT => {
-    return {type: OPEN_MODAL, uId: uId}
-}
-export const closeModalInFriendAC = (uId: number): CloseModalInFriendAT => {
-    return {type: CLOSE_MODAL, uId: uId}
-}
 export const setUsersAC = (users: Array<UserStateType>): SetUsersAT => {
     return {type: SET_USERS, users: users}
 }
@@ -145,5 +141,42 @@ export const setTogglePreloaderAC = (loader: boolean): setTogglePreloaderAT => {
         preloader: loader
     }
 }
+
+
+export const getUsersTC = (currentPageNumber: number, pageSize: number): AppThunk => {
+    return (dispatch:any) => {
+        dispatch(setTogglePreloaderAC(true))
+        userAPI.getUser(currentPageNumber, pageSize)
+            .then((data) => {
+                dispatch(setTogglePreloaderAC(false))
+                // обработка успешного запроса
+                dispatch(setUsersAC(data.items))
+                dispatch(setTotalUserCountAC(data.totalCount))
+            })
+    }
+}
+export const delUserTC = (id: number): AppThunk => {
+    return (dispatch: any) => {
+        userAPI.deleteUser(id)
+            .then((data) => {
+                // обработка успешного запроса
+                if (data.resultCode === 0) {
+                    dispatch(addFriendAC(id))
+                }
+            })
+    }
+}
+export const addUserTC = (id: number): AppThunk => {
+    return (dispatch: any) => {
+        userAPI.addUser(id)
+            .then((data) => {
+                // обработка успешного запроса
+                if (data.resultCode === 0) {
+                    dispatch(delFriendAC(id))
+                }
+            })
+    }
+}
+
 
 export default friendsPageReducer

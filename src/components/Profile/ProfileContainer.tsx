@@ -8,6 +8,7 @@ import {AppStateType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {setProfileUserAC} from "../../Redux/ProfilePageReducer";
+import {userAPI} from "../API/api";
 type PathParamsType = {
     userId: string,
 }
@@ -49,8 +50,7 @@ const ProfileContainer = (props:any) => {
     }
     useEffect(() =>{
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => { props.setProfileUser(response.data)})
+        userAPI.setProfileUser(userId).then(data => props.setProfileUser(data))
 
     },[])
   return<>

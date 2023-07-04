@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from "./CardFriend.module.css";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {addUser, deleteUser} from "../../API/api";
+import {userAPI} from "../../API/api";
 
 type propsCardSrc = {
     user_name: string
@@ -15,12 +14,24 @@ type propsCardSrc = {
     id: number,
     followed: boolean
 }
+const DELAY = 500;
+type SetTimeoutType = ReturnType<typeof setTimeout>
 const CardFriend = (props: propsCardSrc) => {
-    const onClickAddFriendHandler = (id: number) => {
-        props.addFriend(id)
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
+    useEffect(() => {
+        let timeoutId: SetTimeoutType = setTimeout((): void => {
+            setIsDisabled(false);
+        }, DELAY);
+
+        return () => clearTimeout(timeoutId);
+    }, [isDisabled]);
+    const onClickAddFriendHandler = () => {
+        setIsDisabled(true)
+        props.addFriend(props.id)
     }
-    const onClickDelFriendHandler = (id: number) => {
-        props.delFriend(id)
+    const onClickDelFriendHandler = () => {
+        setIsDisabled(true)
+        props.delFriend(props.id)
     }
     const onClickSendMessageHandler = (id: number) => {
     }
@@ -69,23 +80,9 @@ const CardFriend = (props: propsCardSrc) => {
                 </ul>
                 <div className={classes.button_group}>
                     <div className={classes.add_friend_btn}>
-                        {props.followed ? <button onClick={() => {
-                                    deleteUser(props.id, 'cdeb2d03-8fb6-43f9-b42a-f68cc3f9b75a')
-                                        .then((data) => {
-                                    // обработка успешного запроса
-                                    if (data.resultCode === 0) {
-                                        onClickDelFriendHandler(props.id)
-                                    }
-                                })
-                        }} type="submit">Delete Friend</button> : <button onClick={() => {
-                                    addUser(props.id, 'cdeb2d03-8fb6-43f9-b42a-f68cc3f9b75a')
-                                        .then((data) => {
-                                    // обработка успешного запроса
-                                    if (data.resultCode === 0) {
-                                        onClickDelFriendHandler(props.id)
-                                    }
-                                })
-                        }} type="submit">Add Friend</button>}
+                        {props.followed ?
+                            <button disabled={isDisabled} onClick={onClickDelFriendHandler} type="submit">Delete Friend</button> :
+                            <button disabled={isDisabled} onClick={onClickAddFriendHandler} type="submit">Add Friend</button>}
                     </div>
                     <div className={classes.send_message_btn}>
                         <button onClick={() => {

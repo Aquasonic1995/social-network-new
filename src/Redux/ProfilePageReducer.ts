@@ -3,15 +3,6 @@ import {v1} from "uuid";
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST = 'UPDATE_POST';
 export const SET_PROFILE_USER = 'SET_PROFILE_USER';
-// type AddPostInProfilePageAT = AddPostAT | UpdateWordsInPostAT
-// export type AddPostAT = {
-//     type: 'ADD_POST',
-//     newEl: string
-// }
-// export type UpdateWordsInPostAT = {
-//     type: 'UPDATE_POST',
-//     updateWords: string
-// }
 export type  AddMessageInProfilePage = {
     user_name: string
     message: string
