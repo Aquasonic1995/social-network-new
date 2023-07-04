@@ -6,7 +6,7 @@ export const MessageDialogsItem = (props: MessageDialogsItemType) => {
     return (
         <div className={classes.chat}>
             <div className={classes.chat__avatar}>
-                <a href="/Users/к/WebstormProjects/git/social-network/public">
+                <a href="/Users/к/WebstormProjects/git/social-network-new/public">
                     <img
                         src={props.src}
                         alt="img"/>
